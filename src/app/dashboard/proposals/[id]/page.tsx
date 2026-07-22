@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import { ArrowLeft, FileText, ExternalLink, Trash2 } from "lucide-react";
+import { ArrowLeft, FileText, ExternalLink, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
@@ -87,6 +87,14 @@ export default async function ProposalDetailPage({ params }: Props) {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          {doc.status === "draft" && (
+            <Button variant="secondary" size="sm" asChild>
+              <Link href={`${ROUTES.proposals}/${doc.id}/edit`}>
+                <Pencil className="size-3.5" />
+                Edit
+              </Link>
+            </Button>
+          )}
           {nextStatuses.length > 0 && <StatusActions id={doc.id} status={doc.status} nextStatuses={nextStatuses} />}
           <DeleteButton id={doc.id} />
         </div>

@@ -76,7 +76,32 @@ export const templatesRelations = relations(templates, ({ one, many }) => ({
   documents: many(documents),
 }));
 
-export const documentsRelations = relations(documents, ({ one }) => ({
+export const wizardStates = pgTable("wizard_states", {
+  chatId: text("chat_id").primaryKey(),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+  state: jsonb("state").notNull().default({}),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const documentEvents = pgTable("document_events", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  documentId: uuid("document_id")
+    .notNull()
+    .references(() => documents.id, { onDelete: "cascade" }),
+  eventType: text("event_type", { enum: ["sent", "viewed", "signed", "paid", "reminded", "expired", "cancelled", "created"] }).notNull(),
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
+  metadata: jsonb("metadata").default({}),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const documentsRelations = relations(documents, ({ one, many }) => ({
   user: one(users, { fields: [documents.userId], references: [users.id] }),
   template: one(templates, { fields: [documents.templateId], references: [templates.id] }),
+  events: many(documentEvents),
+}));
+
+export const documentEventsRelations = relations(documentEvents, ({ one }) => ({
+  document: one(documents, { fields: [documentEvents.documentId], references: [documents.id] }),
 }));

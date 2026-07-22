@@ -1,19 +1,21 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { FileText, CheckCircle, Clock, Eye } from "lucide-react";
+import { FileText, PenSquare } from "lucide-react";
+import { PrintButton } from "./print-button";
 
 import { db } from "@/db";
-import { documents } from "@/db/schema";
+import { documents, documentEvents } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 import { Logomark } from "@/components/ui/icons";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 const statusConfig: Record<string, { label: string; dot: string; bg: string }> = {
   draft: { label: "Draft", dot: "bg-ink-tertiary", bg: "bg-ink-tertiary/10" },
   sent: { label: "Sent", dot: "bg-blue-500", bg: "bg-blue-500/10" },
   viewed: { label: "Viewed", dot: "bg-yellow-500", bg: "bg-yellow-500/10" },
-  accepted: { label: "Accepted", dot: "bg-green-500", bg: "bg-green-500/10" },
+  accepted: { label: "Signed", dot: "bg-green-500", bg: "bg-green-500/10" },
   rejected: { label: "Rejected", dot: "bg-red-500", bg: "bg-red-500/10" },
 };
 
@@ -38,12 +40,26 @@ export default async function SharePage({ params }: Props) {
 
   if (!doc) notFound();
 
+  // Track view — update status from "sent" to "viewed"
+  if (doc.status === "sent") {
+    await db
+      .update(documents)
+      .set({ status: "viewed", updatedAt: new Date() })
+      .where(eq(documents.id, doc.id));
+
+    await db.insert(documentEvents).values({
+      documentId: doc.id,
+      eventType: "viewed",
+    });
+  }
+
   const content = doc.content as {
     sections?: { title: string; content: string }[];
     pricing?: { items: { description: string; amount: number }[]; total: number };
   } | null;
 
   const status = statusConfig[doc.status] ?? statusConfig.draft;
+  const canSign = doc.status === "draft" || doc.status === "sent" || doc.status === "viewed";
 
   return (
     <div className="min-h-screen bg-canvas">
@@ -68,6 +84,17 @@ export default async function SharePage({ params }: Props) {
               {typeLabels[doc.type] ?? doc.type}
               {doc.recipientName && ` · Prepared for: ${doc.recipientName}`}
             </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <PrintButton />
+            {canSign && (
+              <Button asChild>
+                <Link href={`/share/${token}/sign`}>
+                  <PenSquare className="size-4" />
+                  Sign Now
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
 
@@ -124,6 +151,17 @@ export default async function SharePage({ params }: Props) {
               </div>
             </div>
           </>
+        )}
+
+        {canSign && (
+          <div className="mt-8 text-center">
+            <Button size="lg" asChild>
+              <Link href={`/share/${token}/sign`}>
+                <PenSquare className="size-4" />
+                Sign This Document
+              </Link>
+            </Button>
+          </div>
         )}
 
         <footer className="mt-12 border-t border-hairline pt-6 text-center">
