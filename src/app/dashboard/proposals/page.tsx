@@ -1,10 +1,10 @@
-import { FileText, Plus, ExternalLink, Trash2, ArrowRight } from "lucide-react";
+import { FileText, Plus, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
 import { db } from "@/db";
 import { documents } from "@/db/schema";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 
 import { NoDocuments } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
@@ -19,15 +19,29 @@ const statusConfig: Record<string, { label: string; dot: string; bg: string }> =
   rejected: { label: "Rejected", dot: "bg-red-500", bg: "bg-red-500/10" },
 };
 
-export default async function ProposalsPage() {
+const STATUSES = ["all", "draft", "sent", "viewed", "accepted", "rejected"];
+
+export default async function ProposalsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ status?: string }>;
+}) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   const userId = user!.id;
 
+  const params = await searchParams;
+  const activeFilter = params.status ?? "all";
+
+  const filters = [eq(documents.userId, userId)];
+  if (activeFilter !== "all") {
+    filters.push(eq(documents.status, activeFilter as any));
+  }
+
   const allProposals = await db
     .select()
     .from(documents)
-    .where(eq(documents.userId, userId))
+    .where(and(...filters))
     .orderBy(desc(documents.createdAt));
 
   const typeLabel = (type: string) => {
@@ -43,9 +57,10 @@ export default async function ProposalsPage() {
     <div className="mx-auto max-w-5xl animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-ink">Proposals</h1>
+          <h1 className="text-xl font-semibold text-ink">Documents</h1>
           <p className="mt-1 text-sm text-ink-muted">
-            {allProposals.length} document{allProposals.length !== 1 ? "s" : ""} total
+            {allProposals.length} document{allProposals.length !== 1 ? "s" : ""}
+            {activeFilter !== "all" ? ` (${activeFilter})` : ""}
           </p>
         </div>
         <Button asChild>
@@ -56,8 +71,26 @@ export default async function ProposalsPage() {
         </Button>
       </div>
 
+      <div className="mt-6 flex gap-1 rounded-lg bg-surface-1 p-1 border border-hairline">
+        {STATUSES.map((status) => (
+          <Link
+            key={status}
+            href={status === "all" ? ROUTES.proposals : `${ROUTES.proposals}?status=${status}`}
+            className={`flex-1 rounded-md px-3 py-1.5 text-center text-xs font-medium transition-colors ${
+              activeFilter === status
+                ? "bg-canvas text-ink shadow-sm"
+                : "text-ink-tertiary hover:text-ink"
+            }`}
+          >
+            {status === "all"
+              ? "All"
+              : status.charAt(0).toUpperCase() + status.slice(1)}
+          </Link>
+        ))}
+      </div>
+
       {allProposals.length > 0 ? (
-        <div className="mt-6 space-y-2">
+        <div className="mt-4 space-y-2">
           {allProposals.map((doc) => {
             const status = statusConfig[doc.status] ?? statusConfig.draft;
             return (
@@ -104,16 +137,24 @@ export default async function ProposalsPage() {
       ) : (
         <div className="mt-6 flex flex-col items-center justify-center rounded-lg border border-hairline bg-surface-1 py-24">
           <NoDocuments className="size-24 text-ink-tertiary" />
-          <p className="mt-4 text-sm text-ink-muted">No documents yet</p>
-          <p className="mt-1 text-xs text-ink-tertiary">
-            Create your first proposal, invoice, or contract.
+          <p className="mt-4 text-sm text-ink-muted">
+            {activeFilter !== "all"
+              ? `No ${activeFilter} documents`
+              : "No documents yet"}
           </p>
-          <Button className="mt-4" asChild>
-            <Link href={ROUTES.proposalsNew}>
-              <Plus className="size-4" />
-              Create Document
-            </Link>
-          </Button>
+          <p className="mt-1 text-xs text-ink-tertiary">
+            {activeFilter !== "all"
+              ? "Try a different filter."
+              : "Create your first proposal, invoice, or contract."}
+          </p>
+          {activeFilter === "all" && (
+            <Button className="mt-4" asChild>
+              <Link href={ROUTES.proposalsNew}>
+                <Plus className="size-4" />
+                Create Document
+              </Link>
+            </Button>
+          )}
         </div>
       )}
     </div>

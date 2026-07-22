@@ -9,6 +9,7 @@ import { eq, desc } from "drizzle-orm";
 import { NoTemplates } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/lib/constants";
+import { seedDefaultTemplates } from "./actions";
 
 export default async function TemplatesPage() {
   const supabase = await createClient();
@@ -65,14 +66,22 @@ export default async function TemplatesPage() {
           <NoTemplates className="size-24 text-ink-tertiary" />
           <p className="mt-4 text-sm text-ink-muted">No templates yet</p>
           <p className="mt-1 text-xs text-ink-tertiary">
-            Create a template to reuse across your documents.
+            Create a template from scratch or load our defaults to get started.
           </p>
-          <Button className="mt-4" asChild>
-            <Link href={ROUTES.templatesNew}>
-              <Plus className="size-4" />
-              Create Template
-            </Link>
-          </Button>
+          <div className="mt-4 flex gap-3">
+            <Button asChild variant="secondary">
+              <Link href={ROUTES.templatesNew}>
+                <Plus className="size-4" />
+                Create Template
+              </Link>
+            </Button>
+            <form action={seedDefaultTemplates}>
+              <Button type="submit">
+                <LayoutTemplate className="size-4" />
+                Load Defaults
+              </Button>
+            </form>
+          </div>
         </div>
       )}
     </div>
