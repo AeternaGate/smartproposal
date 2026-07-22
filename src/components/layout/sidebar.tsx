@@ -83,13 +83,15 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           })}
         </nav>
         <div className="border-t border-hairline p-2">
-          <button
-            type="button"
-            className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-ink-muted hover:bg-surface-1 hover:text-ink transition-colors duration-150"
-          >
-            <LogOut className="size-4 shrink-0" />
-            Sign out
-          </button>
+          <form action="/auth/signout" method="post">
+            <button
+              type="submit"
+              className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-ink-muted hover:bg-surface-1 hover:text-ink transition-colors duration-150"
+            >
+              <LogOut className="size-4 shrink-0" />
+              Sign out
+            </button>
+          </form>
         </div>
       </aside>
     </>
