@@ -4,7 +4,7 @@ import { ArrowRight, FileText, Sparkles, Shield, Zap, CheckCircle, Star } from "
 import { Button } from "@/components/ui/button";
 import { LogoFull } from "@/components/ui/icons";
 import { AnimatedBackground } from "@/components/landing/background";
-import { DocumentPreview } from "@/components/landing/document-preview";
+import { ScrollDocument } from "@/components/landing/document-stages";
 import { ROUTES } from "@/lib/constants";
 
 const features = [
@@ -54,18 +54,21 @@ export default function LandingPage() {
             >
               Sign in
             </Link>
-            <Button asChild>
-              <Link href={ROUTES.signup}>
-                Get Started
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+            <div className="group/btn relative">
+              <div className="absolute -inset-0.5 rounded-lg bg-primary/20 opacity-0 blur-sm transition-opacity duration-300 group-hover/btn:opacity-100" />
+              <Button asChild className="relative">
+                <Link href={ROUTES.signup}>
+                  Get Started
+                  <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       <main>
-        <section className="relative overflow-hidden">
+        <section id="hero-section" className="relative overflow-hidden">
           <div className="mx-auto max-w-6xl px-4 pb-16 pt-20 lg:pb-24 lg:pt-28">
             <div className="grid items-center gap-12 lg:grid-cols-2">
               <div className="animate-fade-in">
@@ -88,12 +91,15 @@ export default function LandingPage() {
                 </p>
 
                 <div className="mt-8 flex items-center gap-3">
-                  <Button size="lg" asChild>
-                    <Link href={ROUTES.signup}>
-                      Start Free
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </Button>
+                  <div className="group/btn relative">
+                    <div className="absolute -inset-1 animate-button-glow rounded-lg opacity-0 transition-opacity duration-500 group-hover/btn:opacity-100" />
+                    <Button size="lg" asChild className="relative transition-transform duration-300 group-hover/btn:scale-[1.02]">
+                      <Link href={ROUTES.signup}>
+                        Start Free
+                        <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </div>
                   <Button variant="outline" size="lg" asChild>
                     <Link href={ROUTES.pricing}>See Pricing</Link>
                   </Button>
@@ -117,32 +123,22 @@ export default function LandingPage() {
 
               <div className="animate-scale-in relative flex items-center justify-center lg:justify-end">
                 <div className="absolute size-80 rounded-full bg-primary/10 blur-[100px]" />
-                <div className="relative w-full max-w-[420px]">
-                  <DocumentPreview className="w-full" />
-                  <div className="absolute -bottom-3 -right-3 animate-float rounded-lg border border-hairline bg-surface-1 px-3 py-2">
-                    <div className="flex items-center gap-2">
-                      <Star className="size-3.5 fill-yellow-500 text-yellow-500" />
-                      <span className="text-xs text-ink-muted">Client just signed</span>
-                    </div>
-                  </div>
-                  <div className="absolute -left-3 -top-3 animate-float-slow rounded-lg border border-hairline bg-surface-1 px-3 py-2">
-                    <div className="flex items-center gap-2">
-                      <span className="size-2 rounded-full bg-green-500" />
-                      <span className="text-xs text-ink-muted">Viewed 2 min ago</span>
-                    </div>
-                  </div>
-                </div>
+                <ScrollDocument />
               </div>
             </div>
           </div>
         </section>
 
-        <section className="border-y border-hairline bg-surface-1/50">
+        <section id="features-section" className="border-y border-hairline bg-surface-1/50">
           <div className="mx-auto max-w-6xl px-4 py-10">
             <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="animate-slide-up text-center">
-                  <p className="text-2xl font-semibold text-ink">{stat.value}</p>
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className="animate-slide-up text-center"
+                  style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
+                >
+                  <p className="text-2xl font-semibold text-ink tabular-nums">{stat.value}</p>
                   <p className="mt-1 text-xs text-ink-tertiary">{stat.label}</p>
                 </div>
               ))}
@@ -150,7 +146,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
+        <section id="stats-section" className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-ink lg:text-3xl">
               Everything you need to win more clients
@@ -163,11 +159,12 @@ export default function LandingPage() {
             {features.map((feature, i) => (
               <div
                 key={feature.title}
-                className="animate-slide-up group rounded-lg border border-hairline bg-surface-1 p-6 transition-all duration-300 hover:border-primary/30 hover:bg-surface-2"
+                className="group animate-slide-up rounded-lg border border-hairline bg-surface-1 p-6 transition-all duration-300 hover:border-primary/30 hover:bg-surface-2 hover:-translate-y-0.5"
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
               >
-                <div className="flex size-10 items-center justify-center rounded-lg border border-hairline bg-canvas transition-colors duration-300 group-hover:border-primary/30 group-hover:bg-primary/5">
-                  <feature.icon className="size-5 text-primary" />
+                <div className="relative flex size-10 items-center justify-center rounded-lg border border-hairline bg-canvas transition-all duration-300 group-hover:border-primary/30 group-hover:bg-primary/5">
+                  <div className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <feature.icon className="relative size-5 text-primary" />
                 </div>
                 <h3 className="mt-4 text-sm font-semibold text-ink">{feature.title}</h3>
                 <p className="mt-1 text-sm text-ink-muted">{feature.description}</p>
@@ -176,7 +173,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden border-t border-hairline">
+        <section id="cta-section" className="relative overflow-hidden border-t border-hairline">
           <div className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
             <div className="relative z-10 mx-auto max-w-2xl text-center">
               <h2 className="text-2xl font-semibold text-ink lg:text-3xl">
@@ -186,12 +183,15 @@ export default function LandingPage() {
                 Join freelancers and agencies who use Propel to send proposals that get signed.
               </p>
               <div className="mt-8 flex items-center justify-center gap-3">
-                <Button size="lg" asChild>
-                  <Link href={ROUTES.signup}>
-                    Start Free
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
+                <div className="group/btn relative">
+                  <div className="absolute -inset-1 animate-button-glow rounded-lg opacity-0 transition-opacity duration-500 group-hover/btn:opacity-100" />
+                  <Button size="lg" asChild className="relative transition-transform duration-300 group-hover/btn:scale-[1.02]">
+                    <Link href={ROUTES.signup}>
+                      Start Free
+                      <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    </Link>
+                  </Button>
+                </div>
                 <Button variant="outline" size="lg" asChild>
                   <Link href={ROUTES.login}>Sign In</Link>
                 </Button>

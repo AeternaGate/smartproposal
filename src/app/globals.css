@@ -66,8 +66,12 @@
   --animate-skeleton-pulse: skeleton-pulse 1.5s ease-in-out infinite;
   --animate-glow-drift: glow-drift 8s ease-in-out infinite alternate;
   --animate-glow-drift-slow: glow-drift-slow 12s ease-in-out infinite alternate;
+  --animate-glow-drift-3: glow-drift-3 14s ease-in-out infinite alternate;
   --animate-float: float 3s ease-in-out infinite;
   --animate-float-slow: float 4s ease-in-out infinite reverse;
+  --animate-grid-sweep: grid-sweep 6s ease-in-out infinite alternate;
+  --animate-button-glow: button-glow 2s ease-in-out infinite;
+  --animate-border-dash: border-dash 1s linear infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -101,9 +105,25 @@
     0% { transform: translate(0, 0) scale(1); }
     100% { transform: translate(-5%, -5%) scale(1.15); }
   }
+  @keyframes glow-drift-3 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(8%, -5%) scale(1.2); }
+  }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
+  }
+  @keyframes grid-sweep {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  @keyframes button-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(94, 106, 210, 0.3); }
+    50% { box-shadow: 0 0 20px 4px rgba(94, 106, 210, 0.15); }
+  }
+  @keyframes border-dash {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -8; }
   }
 }
 
@@ -113,8 +133,11 @@
   .animate-scale-in,
   .animate-glow-drift,
   .animate-glow-drift-slow,
+  .animate-glow-drift-3,
   .animate-float,
-  .animate-float-slow {
+  .animate-float-slow,
+  .animate-grid-sweep,
+  .animate-button-glow {
     animation: none !important;
   }
 }
