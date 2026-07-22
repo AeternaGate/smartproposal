@@ -50,7 +50,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         <div className="flex h-14 items-center justify-between border-b border-hairline px-4">
           <Link href={ROUTES.dashboard} className="flex items-center gap-2">
             <Logomark className="size-6" />
-            <span className="text-sm font-semibold text-ink">SmartProposal</span>
+            <span className="text-sm font-semibold text-ink">Propel</span>
           </Link>
           <Button
             variant="ghost"

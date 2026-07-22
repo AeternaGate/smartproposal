@@ -32,7 +32,7 @@ export default function DashboardPage() {
         <div>
           <h1 className="text-xl font-semibold text-ink">Dashboard</h1>
           <p className="mt-1 text-sm text-ink-muted">
-            Welcome to SmartProposal. Create your first proposal to get started.
+            Welcome to Propel. Create your first proposal to get started.
           </p>
         </div>
         <Button asChild>

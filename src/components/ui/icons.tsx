@@ -8,7 +8,7 @@ export function Logomark({ className }: { className?: string }) {
     >
       <rect width="32" height="32" rx="8" fill="#5e6ad2" />
       <path
-        d="M8 22V10l8 6-8 6zM16 22V10l8 6-8 6z"
+        d="M12 24V8h6a6 6 0 010 12h-2l4 4h-4l-4-4z"
         fill="white"
         opacity="0.9"
       />
@@ -19,14 +19,14 @@ export function Logomark({ className }: { className?: string }) {
 export function LogoFull({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 140 32"
+      viewBox="0 0 132 32"
       fill="none"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect width="32" height="32" rx="8" fill="#5e6ad2" />
       <path
-        d="M8 22V10l8 6-8 6zM16 22V10l8 6-8 6z"
+        d="M12 24V8h6a6 6 0 010 12h-2l4 4h-4l-4-4z"
         fill="white"
         opacity="0.9"
       />
@@ -37,8 +37,9 @@ export function LogoFull({ className }: { className?: string }) {
         fontSize="16"
         fontWeight="600"
         fontFamily="Inter, system-ui"
+        letterSpacing="-0.3"
       >
-        SmartProposal
+        Propel
       </text>
     </svg>
   );

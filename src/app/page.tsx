@@ -53,12 +53,12 @@ export default function LandingPage() {
         <section className="mx-auto max-w-5xl px-4 py-24 lg:py-32">
           <div className="animate-slide-up text-center">
             <h1 className="text-5xl font-semibold leading-tight tracking-tight text-ink lg:text-6xl">
-              Proposals that win clients.
+              Proposals that close.
               <br />
               <span className="text-primary">In minutes, not hours.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-muted">
-              SmartProposal uses AI to help freelancers and small agencies create stunning proposals,
+              Propel uses AI to help freelancers and small agencies create stunning proposals,
               invoices, and contracts. Stop formatting — start winning.
             </p>
             <div className="mt-8 flex items-center justify-center gap-4">
@@ -95,7 +95,7 @@ export default function LandingPage() {
       <footer className="border-t border-hairline px-4 py-6">
         <div className="mx-auto flex max-w-5xl items-center justify-between">
           <p className="text-sm text-ink-tertiary">
-            &copy; {new Date().getFullYear()} SmartProposal. All rights reserved.
+              &copy; {new Date().getFullYear()} Propel. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-sm text-ink-tertiary">
             <Link href={ROUTES.pricing} className="hover:text-ink-muted transition-colors">

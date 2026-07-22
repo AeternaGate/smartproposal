@@ -1,5 +1,5 @@
-export const APP_NAME = "SmartProposal";
-export const APP_DESCRIPTION = "AI-powered proposal automation for freelancers and small agencies";
+export const APP_NAME = "Propel";
+export const APP_DESCRIPTION = "AI-powered proposals that close. Built for freelancers and small agencies.";
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 export const FREE_LIMITS = {
