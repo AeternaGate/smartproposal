@@ -101,9 +101,7 @@ export default function LandingPage() {
             <Link href={ROUTES.pricing} className="hover:text-ink-muted transition-colors">
               Pricing
             </Link>
-            <Link href={ROUTES.settings} className="hover:text-ink-muted transition-colors">
-              Contact
-            </Link>
+            <span className="text-ink-tertiary">Contact: support@propel.so</span>
           </div>
         </div>
       </footer>

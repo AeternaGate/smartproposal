@@ -21,7 +21,9 @@ export const ROUTES = {
   login: "/login",
   signup: "/signup",
   pricing: "/pricing",
-  proposals: "/proposals",
-  templates: "/templates",
-  settings: "/settings",
+  proposals: "/dashboard/proposals",
+  proposalsNew: "/dashboard/proposals/new",
+  templates: "/dashboard/templates",
+  templatesNew: "/dashboard/templates/new",
+  settings: "/dashboard/settings",
 } as const;
