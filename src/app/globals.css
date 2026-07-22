@@ -70,8 +70,6 @@
   --animate-float: float 3s ease-in-out infinite;
   --animate-float-slow: float 4s ease-in-out infinite reverse;
   --animate-grid-sweep: grid-sweep 6s ease-in-out infinite alternate;
-  --animate-button-glow: button-glow 2s ease-in-out infinite;
-  --animate-border-dash: border-dash 1s linear infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -117,14 +115,6 @@
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
   }
-  @keyframes button-glow {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(94, 106, 210, 0.3); }
-    50% { box-shadow: 0 0 20px 4px rgba(94, 106, 210, 0.15); }
-  }
-  @keyframes border-dash {
-    0% { stroke-dashoffset: 0; }
-    100% { stroke-dashoffset: -8; }
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -136,8 +126,7 @@
   .animate-glow-drift-3,
   .animate-float,
   .animate-float-slow,
-  .animate-grid-sweep,
-  .animate-button-glow {
+  .animate-grid-sweep {
     animation: none !important;
   }
 }

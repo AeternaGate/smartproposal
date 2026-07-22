@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, FileText, Sparkles, Shield, Zap, CheckCircle, Star } from "lucide-react";
+import { ArrowRight, FileText, Sparkles, Shield, Zap, CheckCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { LogoFull } from "@/components/ui/icons";
 import { AnimatedBackground } from "@/components/landing/background";
-import { ScrollDocument } from "@/components/landing/document-stages";
 import { ROUTES } from "@/lib/constants";
 
 const features = [
@@ -42,7 +41,7 @@ export default function LandingPage() {
     <div className="relative min-h-screen bg-canvas">
       <AnimatedBackground />
 
-      <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/80 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/80 backdrop-blur-md supports-backdrop-filter:bg-canvas/60">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 lg:px-6">
           <Link href="/" className="flex items-center gap-2">
             <LogoFull className="h-6" />
@@ -54,82 +53,73 @@ export default function LandingPage() {
             >
               Sign in
             </Link>
-            <div className="group/btn relative">
-              <div className="absolute -inset-0.5 rounded-lg bg-primary/20 opacity-0 blur-sm transition-opacity duration-300 group-hover/btn:opacity-100" />
-              <Button asChild className="relative">
-                <Link href={ROUTES.signup}>
-                  Get Started
-                  <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
-                </Link>
-              </Button>
-            </div>
+            <Button asChild>
+              <Link href={ROUTES.signup}>
+                Get Started
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </header>
 
       <main>
-        <section id="hero-section" className="relative overflow-hidden">
-          <div className="mx-auto max-w-6xl px-4 pb-16 pt-20 lg:pb-24 lg:pt-28">
-            <div className="grid items-center gap-12 lg:grid-cols-2">
-              <div className="animate-fade-in">
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs text-primary">
-                  <Sparkles className="size-3" />
-                  AI-powered proposal platform
-                </div>
-
-                <h1 className="mt-6 text-5xl font-semibold leading-tight tracking-tight text-ink lg:text-6xl">
-                  Proposals that
-                  <br />
-                  <span className="text-primary">close in minutes</span>
-                  <br />
-                  not hours.
-                </h1>
-
-                <p className="mt-4 max-w-lg text-base text-ink-muted lg:text-lg">
-                  Propel uses AI to help freelancers and small agencies create stunning proposals,
-                  invoices, and contracts. Stop formatting — start winning.
-                </p>
-
-                <div className="mt-8 flex items-center gap-3">
-                  <div className="group/btn relative">
-                    <div className="absolute -inset-1 animate-button-glow rounded-lg opacity-0 transition-opacity duration-500 group-hover/btn:opacity-100" />
-                    <Button size="lg" asChild className="relative transition-transform duration-300 group-hover/btn:scale-[1.02]">
-                      <Link href={ROUTES.signup}>
-                        Start Free
-                        <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                  <Button variant="outline" size="lg" asChild>
-                    <Link href={ROUTES.pricing}>See Pricing</Link>
-                  </Button>
-                </div>
-
-                <div className="mt-8 flex items-center gap-4 text-xs text-ink-tertiary">
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="size-3.5 text-primary" />
-                    No credit card
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="size-3.5 text-primary" />
-                    Free for 3 docs/mo
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="size-3.5 text-primary" />
-                    Cancel anytime
-                  </span>
-                </div>
+        <section className="relative overflow-hidden">
+          <div className="mx-auto max-w-4xl px-4 pb-16 pt-20 text-center lg:pb-24 lg:pt-28">
+            <div className="animate-fade-in">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs text-primary">
+                <Sparkles className="size-3" />
+                AI-powered proposal platform
               </div>
 
-              <div className="animate-scale-in relative flex items-center justify-center lg:justify-end">
-                <div className="absolute size-80 rounded-full bg-primary/10 blur-[100px]" />
-                <ScrollDocument />
+              <h1 className="mt-6 text-5xl font-semibold leading-tight tracking-tight text-ink lg:text-6xl">
+                Proposals that
+                <br />
+                <span className="text-primary">close in minutes</span>
+                <br />
+                not hours.
+              </h1>
+
+              <p className="mx-auto mt-4 max-w-xl text-base text-ink-muted lg:text-lg">
+                Propel uses AI to help freelancers and small agencies create stunning proposals,
+                invoices, and contracts. Stop formatting — start winning.
+              </p>
+
+              <div className="mt-8 flex items-center justify-center gap-3">
+                <Button
+                  size="lg"
+                  asChild
+                  className="transition-all duration-300 hover:shadow-[0_0_24px_-4px_#5e6ad2] hover:scale-[1.02]"
+                >
+                  <Link href={ROUTES.signup}>
+                    Start Free
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link href={ROUTES.pricing}>See Pricing</Link>
+                </Button>
+              </div>
+
+              <div className="mt-8 flex items-center justify-center gap-4 text-xs text-ink-tertiary">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle className="size-3.5 text-primary" />
+                  No credit card
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle className="size-3.5 text-primary" />
+                  Free for 3 docs/mo
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle className="size-3.5 text-primary" />
+                  Cancel anytime
+                </span>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="features-section" className="border-y border-hairline bg-surface-1/50">
+        <section className="border-y border-hairline bg-surface-1/50">
           <div className="mx-auto max-w-6xl px-4 py-10">
             <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
               {stats.map((stat, i) => (
@@ -146,7 +136,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="stats-section" className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
+        <section className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-ink lg:text-3xl">
               Everything you need to win more clients
@@ -163,8 +153,7 @@ export default function LandingPage() {
                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
               >
                 <div className="relative flex size-10 items-center justify-center rounded-lg border border-hairline bg-canvas transition-all duration-300 group-hover:border-primary/30 group-hover:bg-primary/5">
-                  <div className="absolute inset-0 rounded-lg bg-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <feature.icon className="relative size-5 text-primary" />
+                  <feature.icon className="size-5 text-primary" />
                 </div>
                 <h3 className="mt-4 text-sm font-semibold text-ink">{feature.title}</h3>
                 <p className="mt-1 text-sm text-ink-muted">{feature.description}</p>
@@ -173,7 +162,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="cta-section" className="relative overflow-hidden border-t border-hairline">
+        <section className="relative overflow-hidden border-t border-hairline">
           <div className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
             <div className="relative z-10 mx-auto max-w-2xl text-center">
               <h2 className="text-2xl font-semibold text-ink lg:text-3xl">
@@ -183,15 +172,16 @@ export default function LandingPage() {
                 Join freelancers and agencies who use Propel to send proposals that get signed.
               </p>
               <div className="mt-8 flex items-center justify-center gap-3">
-                <div className="group/btn relative">
-                  <div className="absolute -inset-1 animate-button-glow rounded-lg opacity-0 transition-opacity duration-500 group-hover/btn:opacity-100" />
-                  <Button size="lg" asChild className="relative transition-transform duration-300 group-hover/btn:scale-[1.02]">
-                    <Link href={ROUTES.signup}>
-                      Start Free
-                      <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
+                <Button
+                  size="lg"
+                  asChild
+                  className="transition-all duration-300 hover:shadow-[0_0_24px_-4px_#5e6ad2] hover:scale-[1.02]"
+                >
+                  <Link href={ROUTES.signup}>
+                    Start Free
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
                 <Button variant="outline" size="lg" asChild>
                   <Link href={ROUTES.login}>Sign In</Link>
                 </Button>
