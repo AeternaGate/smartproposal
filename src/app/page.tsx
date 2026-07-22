@@ -7,6 +7,7 @@ import { HeroVisual } from "@/components/landing/hero-visual";
 import { FeatureCard } from "@/components/landing/feature-card";
 import { HeroCta, FinalCta } from "@/components/landing/cta-buttons";
 import { BorderBeam } from "@/components/magicui/border-beam";
+import { ShinyText } from "@/components/reactbits/shiny-text";
 import { ROUTES } from "@/lib/constants";
 
 const features = [
@@ -84,7 +85,7 @@ export default function LandingPage() {
                 <div className="animate-fade-in">
                   <div className="relative inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary">
                     <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-                    AI-powered proposal platform
+                    <ShinyText text="AI-powered proposal platform" shineColor="#b0b8ff" speed={4} spread={60} />
                     <BorderBeam size={30} duration={8} borderWidth={1} delay={0} />
                   </div>
 
