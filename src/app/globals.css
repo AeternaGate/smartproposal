@@ -70,6 +70,9 @@
   --animate-float: float 3s ease-in-out infinite;
   --animate-float-slow: float 4s ease-in-out infinite reverse;
   --animate-grid-sweep: grid-sweep 6s ease-in-out infinite alternate;
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+  --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+  --animate-shine: shine var(--duration) infinite linear;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -115,6 +118,20 @@
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
   }
+  @keyframes shimmer-slide {
+    to { transform: translate(calc(100cqw - 100%), 0); }
+  }
+  @keyframes spin-around {
+    0% { transform: translateZ(0) rotate(0); }
+    15%, 35% { transform: translateZ(0) rotate(90deg); }
+    65%, 85% { transform: translateZ(0) rotate(270deg); }
+    100% { transform: translateZ(0) rotate(360deg); }
+  }
+  @keyframes shine {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    to { background-position: 0% 0%; }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -126,7 +143,10 @@
   .animate-glow-drift-3,
   .animate-float,
   .animate-float-slow,
-  .animate-grid-sweep {
+  .animate-grid-sweep,
+  .animate-shimmer-slide,
+  .animate-spin-around,
+  .animate-shine {
     animation: none !important;
   }
 }

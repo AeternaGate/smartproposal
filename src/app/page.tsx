@@ -1,29 +1,30 @@
 import Link from "next/link";
-import { ArrowRight, FileText, Sparkles, Shield, Zap, CheckCircle } from "lucide-react";
+import { Sparkles, FileText, Shield, Zap, CheckCircle } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { LogoFull } from "@/components/ui/icons";
 import { AnimatedBackground } from "@/components/landing/background";
+import { HeroCta, FinalCta } from "@/components/landing/cta-buttons";
+import { FeatureCard } from "@/components/landing/feature-card";
 import { ROUTES } from "@/lib/constants";
 
 const features = [
   {
-    icon: Sparkles,
+    icon: "Sparkles",
     title: "AI-Powered Generation",
     description: "Generate professional proposals from a single prompt. Our AI understands your project and crafts compelling content in seconds.",
   },
   {
-    icon: FileText,
+    icon: "FileText",
     title: "Smart Templates",
     description: "Create once, reuse forever. Build custom templates that capture your brand voice and proposal structure.",
   },
   {
-    icon: Shield,
+    icon: "Shield",
     title: "Secure Sharing",
     description: "Share proposals with a secure link. Track when clients view, and get notified the moment they accept.",
   },
   {
-    icon: Zap,
+    icon: "Zap",
     title: "Lightning Fast",
     description: "From idea to sent proposal in under 5 minutes. Stop spending hours formatting documents.",
   },
@@ -53,12 +54,13 @@ export default function LandingPage() {
             >
               Sign in
             </Link>
-            <Button asChild>
-              <Link href={ROUTES.signup}>
-                Get Started
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+            <Link
+              href={ROUTES.signup}
+              className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-medium text-white transition-all hover:brightness-110 active:translate-y-px"
+            >
+              Get Started
+              <Sparkles className="size-4" />
+            </Link>
           </div>
         </div>
       </header>
@@ -85,17 +87,7 @@ export default function LandingPage() {
                 invoices, and contracts. Stop formatting — start winning.
               </p>
 
-              <div className="mt-8 flex items-center justify-center gap-3">
-                <Button size="lg" asChild>
-                  <Link href={ROUTES.signup}>
-                    Start Free
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <Link href={ROUTES.pricing}>See Pricing</Link>
-                </Button>
-              </div>
+              <HeroCta />
 
               <div className="mt-8 flex items-center justify-center gap-4 text-xs text-ink-tertiary">
                 <span className="flex items-center gap-1.5">
@@ -143,17 +135,13 @@ export default function LandingPage() {
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {features.map((feature, i) => (
-              <div
+              <FeatureCard
                 key={feature.title}
-                className="group animate-slide-up rounded-lg border border-hairline bg-surface-1 p-6 transition-all duration-300 hover:border-primary/30 hover:bg-surface-2 hover:-translate-y-0.5"
-                style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
-              >
-                <div className="relative flex size-10 items-center justify-center rounded-lg border border-hairline bg-canvas transition-all duration-300 group-hover:border-primary/30 group-hover:bg-primary/5">
-                  <feature.icon className="size-5 text-primary" />
-                </div>
-                <h3 className="mt-4 text-sm font-semibold text-ink">{feature.title}</h3>
-                <p className="mt-1 text-sm text-ink-muted">{feature.description}</p>
-              </div>
+                icon={feature.icon as "Sparkles" | "FileText" | "Shield" | "Zap"}
+                title={feature.title}
+                description={feature.description}
+                index={i}
+              />
             ))}
           </div>
         </section>
@@ -167,17 +155,7 @@ export default function LandingPage() {
               <p className="mt-2 text-sm text-ink-muted">
                 Join freelancers and agencies who use Propel to send proposals that get signed.
               </p>
-              <div className="mt-8 flex items-center justify-center gap-3">
-                <Button size="lg" asChild>
-                  <Link href={ROUTES.signup}>
-                    Start Free
-                    <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
-                <Button variant="outline" size="lg" asChild>
-                  <Link href={ROUTES.login}>Sign In</Link>
-                </Button>
-              </div>
+              <FinalCta />
               <p className="mt-4 text-xs text-ink-tertiary">
                 Free plan includes 3 documents per month. No credit card required.
               </p>
