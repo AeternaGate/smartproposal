@@ -86,11 +86,7 @@ export default function LandingPage() {
               </p>
 
               <div className="mt-8 flex items-center justify-center gap-3">
-                <Button
-                  size="lg"
-                  asChild
-                  className="transition-all duration-300 hover:shadow-[0_0_24px_-4px_#5e6ad2] hover:scale-[1.02]"
-                >
+                <Button size="lg" asChild>
                   <Link href={ROUTES.signup}>
                     Start Free
                     <ArrowRight className="size-4" />
@@ -172,11 +168,7 @@ export default function LandingPage() {
                 Join freelancers and agencies who use Propel to send proposals that get signed.
               </p>
               <div className="mt-8 flex items-center justify-center gap-3">
-                <Button
-                  size="lg"
-                  asChild
-                  className="transition-all duration-300 hover:shadow-[0_0_24px_-4px_#5e6ad2] hover:scale-[1.02]"
-                >
+                <Button size="lg" asChild>
                   <Link href={ROUTES.signup}>
                     Start Free
                     <ArrowRight className="size-4" />
