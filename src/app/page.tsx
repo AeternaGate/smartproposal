@@ -7,7 +7,6 @@ import { HeroVisual } from "@/components/landing/hero-visual";
 import { FeatureCard } from "@/components/landing/feature-card";
 import { HeroCta, FinalCta } from "@/components/landing/cta-buttons";
 import { BorderBeam } from "@/components/magicui/border-beam";
-import { ShinyText } from "@/components/reactbits/shiny-text";
 import { ROUTES } from "@/lib/constants";
 
 const features = [
@@ -63,13 +62,16 @@ export default function LandingPage() {
             >
               Sign in
             </Link>
-            <Link
-              href={ROUTES.signup}
-              className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-medium text-white transition-all hover:brightness-110 active:translate-y-px"
-            >
-              Get Started
-              <Sparkles className="size-4" />
-            </Link>
+            <div className="group relative overflow-hidden">
+              <Link
+                href={ROUTES.signup}
+                className="relative z-10 inline-flex h-8 items-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-medium text-white transition-all duration-300 hover:scale-105 active:translate-y-px"
+              >
+                Get Started
+                <Sparkles className="size-4" />
+              </Link>
+              <div className="pointer-events-none absolute inset-0 -translate-x-full rounded-lg bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-500 group-hover:translate-x-0" />
+            </div>
           </div>
         </div>
       </header>
@@ -85,7 +87,7 @@ export default function LandingPage() {
                 <div className="animate-fade-in">
                   <div className="relative inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary">
                     <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-                    <ShinyText text="AI-powered proposal platform" shineColor="#b0b8ff" speed={4} spread={60} />
+                    AI-powered proposal platform
                     <BorderBeam size={30} duration={8} borderWidth={1} delay={0} />
                   </div>
 
