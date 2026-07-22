@@ -29,9 +29,8 @@ export function FeatureCard({ icon, title, description, index }: FeatureCardProp
       </div>
       <h3 className="mt-6 text-base font-semibold text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-ink-muted">{description}</p>
-      <div className="mt-6 flex items-center gap-1 text-xs font-medium text-primary/60 transition-all duration-500 group-hover:text-primary">
-        Learn more
-        <ArrowUpRight className="size-3 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <div className="mt-6 flex items-center gap-1 text-xs font-medium text-primary/0 transition-all duration-500 group-hover:text-primary/60">
+        <ArrowUpRight className="size-3.5 transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
       <div className="absolute bottom-0 left-4 right-4 h-px scale-x-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent transition-transform duration-500 group-hover:scale-x-100" />
     </div>

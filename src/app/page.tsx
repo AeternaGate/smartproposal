@@ -6,6 +6,7 @@ import { AnimatedBackground } from "@/components/landing/background";
 import { HeroVisual } from "@/components/landing/hero-visual";
 import { FeatureCard } from "@/components/landing/feature-card";
 import { HeroCta, FinalCta } from "@/components/landing/cta-buttons";
+import { BorderBeam } from "@/components/magicui/border-beam";
 import { ROUTES } from "@/lib/constants";
 
 const features = [
@@ -81,9 +82,10 @@ export default function LandingPage() {
             <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 lg:items-center">
               <div className="lg:col-span-7">
                 <div className="animate-fade-in">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary">
+                  <div className="relative inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary">
                     <span className="size-1.5 rounded-full bg-primary animate-pulse" />
                     AI-powered proposal platform
+                    <BorderBeam size={30} duration={8} borderWidth={1} delay={0} />
                   </div>
 
                   <h1 className="mt-10 text-4xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
