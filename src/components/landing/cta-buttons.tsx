@@ -11,13 +11,13 @@ export function HeroCta() {
   const router = useRouter();
 
   return (
-    <div className="flex items-center justify-center gap-3">
+    <div className="flex flex-wrap items-center gap-4">
       <ShimmerButton
         onClick={() => router.push(ROUTES.signup)}
-        className="h-9 px-5 text-sm"
+        className="h-10 px-6 text-sm"
       >
         Start Free
-        <ArrowRight className="size-4 ml-1.5" />
+        <ArrowRight className="size-4 ml-2" />
       </ShimmerButton>
       <Button variant="outline" size="lg" onClick={() => router.push(ROUTES.pricing)}>
         See Pricing
@@ -30,13 +30,13 @@ export function FinalCta() {
   const router = useRouter();
 
   return (
-    <div className="flex items-center justify-center gap-3">
+    <div className="flex flex-wrap items-center justify-center gap-4">
       <ShimmerButton
         onClick={() => router.push(ROUTES.signup)}
-        className="h-9 px-5 text-sm"
+        className="h-10 px-6 text-sm"
       >
         Start Free
-        <ArrowRight className="size-4 ml-1.5" />
+        <ArrowRight className="size-4 ml-2" />
       </ShimmerButton>
       <Button variant="outline" size="lg" onClick={() => router.push(ROUTES.login)}>
         Sign In

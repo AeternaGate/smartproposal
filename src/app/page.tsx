@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Sparkles, FileText, Shield, Zap, CheckCircle } from "lucide-react";
+import { Sparkles, CheckCircle } from "lucide-react";
 
 import { LogoFull } from "@/components/ui/icons";
 import { AnimatedBackground } from "@/components/landing/background";
-import { HeroCta, FinalCta } from "@/components/landing/cta-buttons";
+import { HeroVisual } from "@/components/landing/hero-visual";
 import { FeatureCard } from "@/components/landing/feature-card";
+import { HeroCta, FinalCta } from "@/components/landing/cta-buttons";
 import { ROUTES } from "@/lib/constants";
 
 const features = [
@@ -37,6 +38,12 @@ const stats = [
   { value: "100%", label: "Your brand, your voice" },
 ];
 
+const checklist = [
+  "No credit card required",
+  "Free for 3 documents per month",
+  "Cancel anytime",
+];
+
 export default function LandingPage() {
   return (
     <div className="relative min-h-screen bg-canvas">
@@ -67,73 +74,86 @@ export default function LandingPage() {
 
       <main>
         <section className="relative overflow-hidden">
-          <div className="mx-auto max-w-4xl px-4 pb-16 pt-20 text-center lg:pb-24 lg:pt-28">
-            <div className="animate-fade-in">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs text-primary">
-                <Sparkles className="size-3" />
-                AI-powered proposal platform
+          <div className="pointer-events-none absolute -left-6 top-0 select-none text-[280px] font-bold leading-none text-primary/[0.012] lg:text-[400px]">
+            P
+          </div>
+          <div className="mx-auto max-w-6xl px-4 pb-32 pt-20 sm:pb-40 sm:pt-28">
+            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 lg:items-center">
+              <div className="lg:col-span-7">
+                <div className="animate-fade-in">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary">
+                    <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+                    AI-powered proposal platform
+                  </div>
+
+                  <h1 className="mt-10 text-4xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+                    Proposals that
+                    <br />
+                    <span className="text-primary">close in minutes</span>
+                    <br />
+                    not hours.
+                  </h1>
+
+                  <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-muted sm:text-lg">
+                    Propel uses AI to help freelancers and small agencies create stunning proposals,
+                    invoices, and contracts. Stop formatting — start winning.
+                  </p>
+
+                  <div className="mt-12">
+                    <HeroCta />
+                  </div>
+
+                  <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-ink-tertiary">
+                    {checklist.map((item) => (
+                      <span key={item} className="flex items-center gap-1.5">
+                        <CheckCircle className="size-3.5 text-primary/60" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <h1 className="mt-6 text-5xl font-semibold leading-tight tracking-tight text-ink lg:text-6xl">
-                Proposals that
-                <br />
-                <span className="text-primary">close in minutes</span>
-                <br />
-                not hours.
-              </h1>
-
-              <p className="mx-auto mt-4 max-w-xl text-base text-ink-muted lg:text-lg">
-                Propel uses AI to help freelancers and small agencies create stunning proposals,
-                invoices, and contracts. Stop formatting — start winning.
-              </p>
-
-              <HeroCta />
-
-              <div className="mt-8 flex items-center justify-center gap-4 text-xs text-ink-tertiary">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="size-3.5 text-primary" />
-                  No credit card
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="size-3.5 text-primary" />
-                  Free for 3 docs/mo
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="size-3.5 text-primary" />
-                  Cancel anytime
-                </span>
+              <div className="hidden lg:col-span-5 lg:block">
+                <HeroVisual />
               </div>
             </div>
           </div>
         </section>
 
-        <section className="border-y border-hairline bg-surface-1/50">
-          <div className="mx-auto max-w-6xl px-4 py-10">
-            <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+        <section className="relative border-y border-hairline bg-surface-1/50">
+          <div className="mx-auto max-w-6xl px-4 py-16 lg:py-20">
+            <div className="grid grid-cols-2 gap-y-10 lg:grid-cols-4">
               {stats.map((stat, i) => (
                 <div
                   key={stat.label}
-                  className="animate-slide-up text-center"
+                  className="animate-slide-up relative text-center"
                   style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
                 >
-                  <p className="text-2xl font-semibold text-ink tabular-nums">{stat.value}</p>
-                  <p className="mt-1 text-xs text-ink-tertiary">{stat.label}</p>
+                  {i < stats.length - 1 && (
+                    <div className="absolute right-0 top-1/2 hidden h-10 w-px -translate-y-1/2 lg:block bg-gradient-to-b from-transparent via-hairline to-transparent" />
+                  )}
+                  <p className="text-3xl font-semibold text-ink tabular-nums tracking-tight lg:text-4xl">{stat.value}</p>
+                  <p className="mt-2 text-[11px] uppercase tracking-[0.1em] text-ink-tertiary">{stat.label}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
-          <div className="text-center">
-            <h2 className="text-2xl font-semibold text-ink lg:text-3xl">
+        <section className="mx-auto max-w-6xl px-4 py-28 lg:py-36">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary mb-8">
+              Features
+            </div>
+            <h2 className="text-3xl font-semibold text-ink tracking-tight lg:text-4xl">
               Everything you need to win more clients
             </h2>
-            <p className="mt-2 text-sm text-ink-muted">
+            <p className="mt-4 text-base text-ink-muted">
               Built for the way freelancers and agencies actually work.
             </p>
           </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          <div className="mt-16 grid gap-6 sm:grid-cols-2">
             {features.map((feature, i) => (
               <FeatureCard
                 key={feature.title}
@@ -147,21 +167,26 @@ export default function LandingPage() {
         </section>
 
         <section className="relative overflow-hidden border-t border-hairline">
-          <div className="mx-auto max-w-6xl px-4 py-20 lg:py-28">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(94,106,210,0.06),transparent)]" />
+          <div className="mx-auto max-w-6xl px-4 py-28 lg:py-36">
             <div className="relative z-10 mx-auto max-w-2xl text-center">
-              <h2 className="text-2xl font-semibold text-ink lg:text-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary mb-8">
+                Get Started
+              </div>
+              <h2 className="text-3xl font-semibold text-ink tracking-tight lg:text-4xl">
                 Ready to close your next deal?
               </h2>
-              <p className="mt-2 text-sm text-ink-muted">
+              <p className="mt-4 text-base text-ink-muted">
                 Join freelancers and agencies who use Propel to send proposals that get signed.
               </p>
-              <FinalCta />
-              <p className="mt-4 text-xs text-ink-tertiary">
+              <div className="mt-10">
+                <FinalCta />
+              </div>
+              <p className="mt-6 text-xs text-ink-tertiary">
                 Free plan includes 3 documents per month. No credit card required.
               </p>
             </div>
           </div>
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(94,106,210,0.06),transparent)]" />
         </section>
       </main>
 
@@ -170,7 +195,7 @@ export default function LandingPage() {
           <p className="text-sm text-ink-tertiary">
             &copy; {new Date().getFullYear()} Propel. All rights reserved.
           </p>
-          <div className="flex items-center gap-4 text-sm text-ink-tertiary">
+          <div className="flex items-center gap-6 text-sm text-ink-tertiary">
             <Link href={ROUTES.pricing} className="hover:text-ink-muted transition-colors">
               Pricing
             </Link>
