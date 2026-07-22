@@ -29,6 +29,9 @@ export const users = pgTable("users", {
   stripeCustomerId: text("stripe_customer_id"),
   documentsUsedThisMonth: integer("documents_used_this_month").notNull().default(0),
   subscriptionEndsAt: timestamp("subscription_ends_at", { withTimezone: true }),
+  telegramChatId: text("telegram_chat_id"),
+  telegramVerificationCode: text("telegram_verification_code"),
+  telegramVerificationExpiresAt: timestamp("telegram_verification_expires_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });

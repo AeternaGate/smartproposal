@@ -16,7 +16,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.supabase.co https://*.vercel.app https://api.openrouter.ai",
+      "connect-src 'self' https://*.supabase.co https://*.vercel.app https://api.openrouter.ai https://api.telegram.org",
       "frame-src 'self'",
       "object-src 'none'",
       "base-uri 'self'",

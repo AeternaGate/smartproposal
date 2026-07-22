@@ -1,4 +1,4 @@
-import { User, CreditCard, Palette, Bell, Globe } from "lucide-react";
+import { User, CreditCard, Palette, Bell, Globe, Smartphone, Link2, Unlink } from "lucide-react";
 import Link from "next/link";
 
 import { createClient } from "@/lib/supabase/server";
@@ -7,7 +7,9 @@ import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { ROUTES, PRO_PRICE_MONTHLY } from "@/lib/constants";
+import { ROUTES, PRO_PRICE_MONTHLY, APP_NAME } from "@/lib/constants";
+import { generateTelegramCode, unlinkTelegram, setWebhook } from "./actions";
+import { TelegramSection } from "./telegram-section";
 
 const sections = [
   {
@@ -80,14 +82,22 @@ export default async function SettingsPage() {
         ))}
       </div>
 
-      <div className="mt-8 rounded-lg border border-hairline bg-surface-1 p-4">
+      <div className="mt-8">
+        <TelegramSection
+          telegramChatId={userData?.telegramChatId ?? null}
+          verificationCode={userData?.telegramVerificationCode ?? null}
+          verificationExpiresAt={userData?.telegramVerificationExpiresAt?.toISOString() ?? null}
+        />
+      </div>
+
+      <div className="mt-4 rounded-lg border border-hairline bg-surface-1 p-4">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-ink">Current Plan</p>
             <p className="text-xs text-ink-tertiary mt-0.5">
               {userData?.subscriptionTier === "pro"
                 ? "You're on the Pro plan."
-                : `You're on the Free plan. ${PRO_PRICE_MONTHLY}/mo to upgrade.`}
+                : `You're on the Free plan. $${PRO_PRICE_MONTHLY}/mo to upgrade.`}
             </p>
           </div>
           {userData?.subscriptionTier !== "pro" && (
