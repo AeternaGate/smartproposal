@@ -3,8 +3,8 @@ import { Sparkles, CheckCircle } from "lucide-react";
 
 import { LogoFull } from "@/components/ui/icons";
 import { AnimatedBackground } from "@/components/landing/background";
-import { HeroVisual } from "@/components/landing/hero-visual";
 import { FeatureCard } from "@/components/landing/feature-card";
+import { SocialProof } from "@/components/landing/social-proof";
 import { HeroCta, FinalCta } from "@/components/landing/cta-buttons";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { ROUTES } from "@/lib/constants";
@@ -82,45 +82,37 @@ export default function LandingPage() {
             P
           </div>
           <div className="mx-auto max-w-6xl px-4 pb-32 pt-20 sm:pb-40 sm:pt-28">
-            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 lg:items-center">
-              <div className="lg:col-span-7">
-                <div className="animate-fade-in">
-                  <div className="relative inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary">
-                    <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-                    AI-powered proposal platform
-                    <BorderBeam size={30} duration={8} borderWidth={1} delay={0} />
-                  </div>
-
-                  <h1 className="mt-10 text-4xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
-                    Proposals that
-                    <br />
-                    <span className="text-primary">close in minutes</span>
-                    <br />
-                    not hours.
-                  </h1>
-
-                  <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-muted sm:text-lg">
-                    Propel uses AI to help freelancers and small agencies create stunning proposals,
-                    invoices, and contracts. Stop formatting — start winning.
-                  </p>
-
-                  <div className="mt-12">
-                    <HeroCta />
-                  </div>
-
-                  <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-ink-tertiary">
-                    {checklist.map((item) => (
-                      <span key={item} className="flex items-center gap-1.5">
-                        <CheckCircle className="size-3.5 text-primary/60" />
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            <div className="animate-fade-in mx-auto max-w-4xl text-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary">
+                <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+                AI-powered proposal platform
+                <BorderBeam size={30} duration={8} borderWidth={1} delay={0} />
               </div>
 
-              <div className="hidden lg:col-span-5 lg:block">
-                <HeroVisual />
+              <h1 className="mt-10 text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+                Proposals that
+                <br />
+                <span className="text-primary">close in minutes</span>
+                <br />
+                not hours.
+              </h1>
+
+              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
+                Propel uses AI to help freelancers and small agencies create stunning proposals,
+                invoices, and contracts. Stop formatting — start winning.
+              </p>
+
+              <div className="mt-12 flex justify-center">
+                <HeroCta />
+              </div>
+
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-ink-tertiary">
+                {checklist.map((item) => (
+                  <span key={item} className="flex items-center gap-1.5">
+                    <CheckCircle className="size-3.5 text-primary/60" />
+                    {item}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -170,6 +162,8 @@ export default function LandingPage() {
             ))}
           </div>
         </section>
+
+        <SocialProof />
 
         <section className="relative overflow-hidden border-t border-hairline">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(94,106,210,0.06),transparent)]" />

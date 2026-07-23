@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter), Inter, SF Pro Display, system-ui, sans-serif;
+  --font-sans: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
   --color-canvas: #010102;
@@ -64,12 +64,9 @@
   --animate-slide-in-right: slide-in-right 0.3s ease-out;
   --animate-slide-out-right: slide-out-right 0.2s ease-in;
   --animate-skeleton-pulse: skeleton-pulse 1.5s ease-in-out infinite;
-  --animate-glow-drift: glow-drift 8s ease-in-out infinite alternate;
-  --animate-glow-drift-slow: glow-drift-slow 12s ease-in-out infinite alternate;
-  --animate-glow-drift-3: glow-drift-3 14s ease-in-out infinite alternate;
+  --animate-glow-drift: glow-drift 20s ease-in-out infinite alternate;
+  --animate-glow-drift-slow: glow-drift-slow 28s ease-in-out infinite alternate;
   --animate-float: float 3s ease-in-out infinite;
-  --animate-float-slow: float 4s ease-in-out infinite reverse;
-  --animate-grid-sweep: grid-sweep 6s ease-in-out infinite alternate;
   --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
   --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
   --animate-shine: shine var(--duration) infinite linear;
@@ -106,24 +103,16 @@
     50% { opacity: 0.4; }
   }
   @keyframes glow-drift {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(5%, 8%) scale(1.1); }
+    0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+    100% { transform: translate(4%, 6%) scale(1.15); opacity: 1; }
   }
   @keyframes glow-drift-slow {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-5%, -5%) scale(1.15); }
-  }
-  @keyframes glow-drift-3 {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(8%, -5%) scale(1.2); }
+    0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+    100% { transform: translate(-6%, -4%) scale(1.2); opacity: 0.9; }
   }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
-  }
-  @keyframes grid-sweep {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
   }
   @keyframes shimmer-slide {
     to { transform: translate(calc(100cqw - 100%), 0); }
@@ -138,24 +127,6 @@
     0% { background-position: 0% 0%; }
     50% { background-position: 100% 100%; }
     to { background-position: 0% 0%; }
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-in,
-  .animate-slide-up,
-  .animate-scale-in,
-  .animate-glow-drift,
-  .animate-glow-drift-slow,
-  .animate-glow-drift-3,
-  .animate-float,
-  .animate-float-slow,
-  .animate-grid-sweep,
-  .animate-shimmer-slide,
-  .animate-spin-around,
-  .animate-shine,
-  .animate-border-beam {
-    animation: none !important;
   }
 }
 
@@ -175,6 +146,29 @@
 @utility scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: var(--color-hairline-strong) transparent;
+}
+
+@layer utilities {
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in,
+  .animate-glow-drift,
+  .animate-glow-drift-slow,
+  .animate-float,
+  .animate-shimmer-slide,
+  .animate-spin-around,
+  .animate-shine,
+  .animate-border-beam {
+    animation: none !important;
+  }
 }
 
 @media print {
